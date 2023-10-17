@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/task-nqueens-frontend/static/css/main.9b6ff7d1.css",
+    "main.js": "/task-nqueens-frontend/static/js/main.c3410abf.js",
+    "static/js/787.1f38372b.chunk.js": "/task-nqueens-frontend/static/js/787.1f38372b.chunk.js",
+    "index.html": "/task-nqueens-frontend/index.html",
+    "main.9b6ff7d1.css.map": "/task-nqueens-frontend/static/css/main.9b6ff7d1.css.map",
+    "main.c3410abf.js.map": "/task-nqueens-frontend/static/js/main.c3410abf.js.map",
+    "787.1f38372b.chunk.js.map": "/task-nqueens-frontend/static/js/787.1f38372b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9b6ff7d1.css",
+    "static/js/main.c3410abf.js"
+  ]
+}
