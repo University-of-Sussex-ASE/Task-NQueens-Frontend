@@ -1,84 +1,41 @@
-import React, { useEffect, useState } from "react";
-import "./Chessboard.css";
-import queenImage from "../images/queen.png";
-import solveNQueens from '../algorithms/nQueensAlgorithm';
+import React, { useEffect } from "react";
+import "./Chessboard.scss";
 
-function Chessboard({ n, queensPositions = [] }) {
+function Chessboard({ n, queensPositions = [],  handleSquareClick, clickedPositions = [] }) {
   const boardStyle = {
     gridTemplateColumns: `repeat(${n}, 1fr)`,
     gridTemplateRows: `repeat(${n}, 1fr)`,
-    width: `800px`,
-    height: `800px`,
   };
 
-  const handleClick = (target) => {
-    queensPositions = solveNQueens(n)
-    console.log("you clicked me", queensPositions);
+  useEffect(() => {
+    const tiles = document.querySelectorAll(".tile");
 
+    tiles.forEach((tile) => {
+      tile.classList.remove("clicked-tile");
+    });
 
-    for (let i = 0; i < queensPositions.length; i++) {
-      const row = i;
-      const col = queensPositions[i];
-      const queenPosition = row * n + col;
-      console.log(queenPosition)
-
-      board[queenPosition] = (
-        <div
-          className="tile"
-          style={{
-            ...tileStyle,
-            backgroundImage: `url(${queenImage})`,
-            backgroundSize: "cover",
-          }}
-        ></div>
-      );
-    }
-  };
-
-  const tileStyle = {
-    width: `100%`,
-    height: `100%`,
-  };
+    clickedPositions.forEach(({ row, col }) => {
+      const index = row * n + col;
+      tiles[index].classList.add("clicked-tile");
+    });
+  }, [clickedPositions, n]);
 
   let board = [];
 
-  for (let i = 0; i < n * n; i++) {
+  for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       const number = j + i;
 
-      number % 2 === 0
-        ? board.push(
-            <div
-              className="tile black-tile"
-              style={tileStyle}
-              onClick={handleClick}
-            ></div>
-          )
-        : board.push(
-            <div
-              className="tile white-tile"
-              style={tileStyle}
-              onClick={handleClick}
-            ></div>
-          );
+      const isQueen = queensPositions.includes(j) && i === queensPositions.indexOf(j);
+
+      board.push(
+        <div
+          key={`${i}-${j}`}
+          className={`tile ${number % 2 === 0 ? "black-tile" : "white-tile"} ${isQueen ? "queen-tile" : ""}`}
+          onClick={() => handleSquareClick(i, j)}
+        ></div>
+      );
     }
-  }
-
-  for (let i = 0; i < queensPositions.length; i++) {
-    const row = i;
-    const col = queensPositions[i];
-    const queenPosition = row * n + col;
-
-    board[queenPosition] = (
-      <div
-        className="tile"
-        style={{
-          ...tileStyle,
-          backgroundImage: `url(${queenImage})`,
-          backgroundSize: "cover",
-        }}
-      ></div>
-    );
   }
 
   return n ? (

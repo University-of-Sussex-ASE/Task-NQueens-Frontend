@@ -1,8 +1,8 @@
-const solveNQueens = (n) => {
+const solveNQueens = (n, clickedPositions) => {
     let solutions = [];
 
     if (n === 1) {
-        return [0];
+        return [[0]];
     }
 
     if (n === 2 || n === 3) {
@@ -43,6 +43,21 @@ const solveNQueens = (n) => {
     }
 
     placeQueen(0);
+
+    // Filter solutions to include only those that match clicked positions
+    solutions = solutions.filter((solution) => {
+        for (const { row, col } of clickedPositions) {
+            if (solution[row] !== col) {
+                return false;
+            }
+        }
+        return true;
+    });
+
+    // If there are no valid solutions for the clicked positions, return an empty array
+    if (solutions.length === 0) {
+        return [];
+    }
 
     return solutions;
 };

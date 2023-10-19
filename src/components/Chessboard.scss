@@ -1,0 +1,29 @@
+#chessboard {
+    display: grid;
+    background-color: blue;
+    width: 800px;
+    height: 800px;
+
+    .black-tile {
+        background-color: #779556;
+    }
+
+    .white-tile {
+        background-color: #ebecd0;
+    }
+
+    .tile {
+        height: 100%;
+        width: 100%;
+
+        &:hover {
+            cursor: pointer;
+            filter: brightness(80%);
+        }
+    }
+
+    .queen-tile, .clicked-tile {
+        background-image: url('../images/queen.svg');
+        background-size: cover;
+    }
+}
