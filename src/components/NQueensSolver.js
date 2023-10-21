@@ -13,6 +13,25 @@ function NQueensSolver() {
   const [isWarning, setIsWarning] = useState(false);
 
   const { Title } = Typography;
+  const [clickedPositions, setClickedPositions] = useState([]);
+
+  const handleSolve = (e) => {
+    e.preventDefault();
+    if (n <= 12) {
+      setSolutions(solveNQueens(n, clickedPositions));
+      setCurrentSolution(0);
+      setClickedPositions([]);
+    }
+  };
+
+  const handleResetBoard = (e) => {
+    e.preventDefault();
+    setClickedPositions([]);
+    setSolutions([]);
+    setCurrentSolution(0);
+    setIsWarning(false);
+    setIsLoading(false);
+  };
 
   const handleInputChange = (e) => {
     let numberOfQueensEntered = e.target.value;
@@ -26,14 +45,19 @@ function NQueensSolver() {
         setIsWarning(true);
       }, 1000);
     }
-
   };
 
-  const handleSolve = (e) => {
-    e.preventDefault();
-    if (n <= 12) {
-      setSolutions(solveNQueens(n));
-      setCurrentSolution(0);
+  const handleSquareClick = (row, col) => {
+    if (solutions.length > 0) return;
+
+    const isClicked = clickedPositions.some((position) => position.row === row && position.col === col);
+
+    if (isClicked) {
+      const updatedClickedPositions = clickedPositions.filter((position) => position.row !== row || position.col !== col);
+      setClickedPositions(updatedClickedPositions);
+    } else if (clickedPositions.length < n) {
+      const newClickedPosition = { row, col };
+      setClickedPositions([...clickedPositions, newClickedPosition]);
     }
   };
 
@@ -48,6 +72,7 @@ function NQueensSolver() {
     }
   };
 
+
   return (
     <div>
       {/* Input Form */}
@@ -60,6 +85,11 @@ function NQueensSolver() {
           <Col md={2} style={{ paddingLeft: "5px" }}>
             <Button type="primary" shape="round" onClick={handleSolve}>
               Solve
+            </Button>
+          </Col>
+          <Col >
+            <Button type="primary" danger shape="round" onClick={handleResetBoard}>
+              Reset board
             </Button>
           </Col>
           <Col>{isLoading ? <Spin /> : ""}</Col>
@@ -83,7 +113,7 @@ function NQueensSolver() {
       {/* Display the chessboard here */}
       <Row>
         <Col>
-          <Chessboard n={n} queensPositions={queensPositions} />
+          <Chessboard n={n} queensPositions={queensPositions} handleSquareClick={handleSquareClick} clickedPositions={clickedPositions} />
         </Col>
 
         {/* Solutions */}
@@ -91,21 +121,22 @@ function NQueensSolver() {
         <Col>
           <div style={{ paddingLeft: "20px" }}>
             <Title level={5}>Number of solutions: {solutions.length}</Title>
-            <Title level={5}>Current solution: {currentSolution + 1}</Title>
-            <Title level={5}>
-              Current solution in text: {solutions[currentSolution]}
-            </Title>
-            <Button type="primary" onClick={handleSwitchSolution("prev")}>
-              Previous
-            </Button>
-            <Button
-              type="primary"
-              danger
-              style={{ marginLeft: "4px" }}
-              onClick={handleSwitchSolution("next")}
-            >
-              Next
-            </Button>
+            {solutions.length ?
+              <div>
+                <Title level={5}>Current solution: {currentSolution + 1}</Title>
+                <Button type="primary" onClick={handleSwitchSolution("prev")}>
+                  Previous
+                </Button>
+                <Button
+                  type="primary"
+                  danger
+                  style={{ marginLeft: "4px" }}
+                  onClick={handleSwitchSolution("next")}
+                >
+                  Next
+                </Button>
+              </div>
+              : ""}
           </div>
         </Col>
       </Row>
