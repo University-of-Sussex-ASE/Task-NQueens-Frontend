@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/Task-NQueens-Frontend/static/css/main.9b6ff7d1.css",
-    "main.js": "/Task-NQueens-Frontend/static/js/main.3ae3a241.js",
+    "main.css": "/Task-NQueens-Frontend/static/css/main.8ac334e8.css",
+    "main.js": "/Task-NQueens-Frontend/static/js/main.efcfb67e.js",
     "static/js/787.9b517cb4.chunk.js": "/Task-NQueens-Frontend/static/js/787.9b517cb4.chunk.js",
+    "static/media/queen.svg": "/Task-NQueens-Frontend/static/media/queen.7a1aecff0f22ff68c43f.svg",
     "index.html": "/Task-NQueens-Frontend/index.html",
-    "main.9b6ff7d1.css.map": "/Task-NQueens-Frontend/static/css/main.9b6ff7d1.css.map",
-    "main.3ae3a241.js.map": "/Task-NQueens-Frontend/static/js/main.3ae3a241.js.map",
+    "main.8ac334e8.css.map": "/Task-NQueens-Frontend/static/css/main.8ac334e8.css.map",
+    "main.efcfb67e.js.map": "/Task-NQueens-Frontend/static/js/main.efcfb67e.js.map",
     "787.9b517cb4.chunk.js.map": "/Task-NQueens-Frontend/static/js/787.9b517cb4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9b6ff7d1.css",
-    "static/js/main.3ae3a241.js"
+    "static/css/main.8ac334e8.css",
+    "static/js/main.efcfb67e.js"
   ]
 }
