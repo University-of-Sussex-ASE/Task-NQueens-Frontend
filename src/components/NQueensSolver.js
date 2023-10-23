@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Chessboard from "./Chessboard";
 import solveNQueens from "../algorithms/nQueensAlgorithm";
-import { Button, Typography, Row, Col, Input, Spin, Alert, Card, Skeleton } from "antd";
+import { Button, Typography, Row, Col, Input, Spin, Alert, Card } from "antd";
 
 function NQueensSolver() {
   const [n, setN] = useState(4);
