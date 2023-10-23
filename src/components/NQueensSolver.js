@@ -40,11 +40,19 @@ function NQueensSolver() {
       }
 
       setIsLoading(false);
-    } else {
+    } else if (n > 12) {
       setIsWarning(true);
       setErrorMessage(
         "Exceeding the value of 12 can take very long to compute."
       );
+      setTimeout(() => {
+        setIsWarning(false);
+      }, 3000);
+    } else {
+      setIsLoading(false);
+      setIsWarning(true);
+
+      setErrorMessage("Invalid input. n should be greater than zero.");
       setTimeout(() => {
         setIsWarning(false);
       }, 3000);
@@ -116,8 +124,11 @@ function NQueensSolver() {
               clickedPositions={clickedPositions}
             />
           ) : (
-            <div id="container" style={{padding:"24px", marginLeft:"400px"}}>
-            <Title></Title>
+            <div
+              id="container"
+              style={{ padding: "24px", marginLeft: "400px" }}
+            >
+              <Title></Title>
             </div>
           )}
         </Col>
@@ -181,14 +192,22 @@ function NQueensSolver() {
                     </Title>
                     <Button
                       type="primary"
-                      style={{ marginLeft: "4px", backgroundColor:"green", color:"white" }}
+                      style={{
+                        marginLeft: "4px",
+                        backgroundColor: "green",
+                        color: "white",
+                      }}
                       onClick={handleSwitchSolution("prev")}
                     >
                       Previous
                     </Button>
                     <Button
                       type="success"
-                      style={{ marginLeft: "4px", backgroundColor:"green", color:"white" }}
+                      style={{
+                        marginLeft: "4px",
+                        backgroundColor: "green",
+                        color: "white",
+                      }}
                       onClick={handleSwitchSolution("next")}
                     >
                       Next
