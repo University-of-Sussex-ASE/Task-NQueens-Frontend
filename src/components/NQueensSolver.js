@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Chessboard from "./Chessboard";
 import solveNQueens from "../algorithms/nQueensAlgorithm";
 import { Button, Typography, Row, Col, Input, Spin, Alert, Card } from "antd";
