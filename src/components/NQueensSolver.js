@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Chessboard from "./Chessboard";
 import solveNQueens from "../algorithms/nQueensAlgorithm";
-import { Button, Typography, Row, Col, Input, Spin, Alert, Card } from "antd";
+import { Button, Typography, Row, Col, Input, Spin, Alert, Card, Skeleton } from "antd";
 
 function NQueensSolver() {
   const [n, setN] = useState(4);
@@ -20,8 +20,6 @@ function NQueensSolver() {
   const handleSolve = (e) => {
     e.preventDefault();
     setIsLoading(true);
-
-    console.log("test", n);
 
     if (n >= 1 && n <= 12) {
       const response = solveNQueens(n, clickedPositions);
@@ -50,7 +48,6 @@ function NQueensSolver() {
       setTimeout(() => {
         setIsWarning(false);
       }, 3000);
-
     }
   };
 
@@ -66,7 +63,7 @@ function NQueensSolver() {
   const handleInputChange = (e) => {
     let numberOfQueensEntered = e.target.value;
 
-    if (numberOfQueensEntered >= 1) {
+    if (numberOfQueensEntered >= 0) {
       setN(parseInt(numberOfQueensEntered));
       setSolutions([]);
       setCurrentSolution(0);
@@ -111,12 +108,18 @@ function NQueensSolver() {
       {/* Display the chessboard here */}
       <Row>
         <Col>
-          <Chessboard
-            n={n}
-            queensPositions={queensPositions}
-            handleSquareClick={handleSquareClick}
-            clickedPositions={clickedPositions}
-          />
+          {n > 0 ? (
+            <Chessboard
+              n={n}
+              queensPositions={queensPositions}
+              handleSquareClick={handleSquareClick}
+              clickedPositions={clickedPositions}
+            />
+          ) : (
+            <div id="container" style={{padding:"24px", marginLeft:"400px"}}>
+            <Title></Title>
+            </div>
+          )}
         </Col>
 
         {/* Solutions */}
@@ -137,7 +140,7 @@ function NQueensSolver() {
                   <Col md={4}>
                     <Input
                       type="number"
-                      min={1}
+                      // min={1}
                       value={n}
                       onChange={handleInputChange}
                     />
@@ -164,7 +167,9 @@ function NQueensSolver() {
             </Row>
 
             <Row></Row>
-            <Col md={12}>{isLoading ? <Spin message="loading queens..." /> : ""}</Col>
+            <Col md={12}>
+              {isLoading ? <Spin message="loading queens..." /> : ""}
+            </Col>
 
             <Row>
               <div style={{ paddingLeft: "20px" }}>
@@ -176,14 +181,14 @@ function NQueensSolver() {
                     </Title>
                     <Button
                       type="primary"
+                      style={{ marginLeft: "4px", backgroundColor:"green", color:"white" }}
                       onClick={handleSwitchSolution("prev")}
                     >
                       Previous
                     </Button>
                     <Button
-                      type="primary"
-                      danger
-                      style={{ marginLeft: "4px" }}
+                      type="success"
+                      style={{ marginLeft: "4px", backgroundColor:"green", color:"white" }}
                       onClick={handleSwitchSolution("next")}
                     >
                       Next
